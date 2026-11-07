@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1,user-scalable=no">
+  <meta name="theme-color" content="#080d1a">
+  <meta name="description" content="RADIUS — タップひとつで全方位を迎撃。重なる瞬間を狙うワンタップ・アーケードゲーム。">
+  <title>RADIUS | ONE TOUCH ARCADE</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <main class="game" id="game">
+    <header class="hud">
+      <div class="brand"><span class="brand-mark" aria-hidden="true"><i></i></span><div><strong>RADIUS</strong><span>ONE TOUCH ARCADE</span></div></div>
+      <div class="stats">
+        <div class="score-wrap"><span class="stat-label">SCORE</span><strong id="score">000000</strong></div>
+        <div class="best-wrap"><span class="stat-label">BEST</span><span id="best">000000</span></div>
+      </div>
+    </header>
+
+    <section class="arena" id="arena" aria-label="ゲーム画面。タップすると衝撃波を発射します">
+      <canvas id="view" aria-hidden="true"></canvas>
+      <div class="arena-top">
+        <div class="wave-counter" id="waveCounter">WAVE 00</div>
+        <div class="life" id="life" aria-label="残り耐久3">
+          <i></i><i></i><i></i>
+        </div>
+      </div>
+      <div class="status-line" id="statusLine" aria-live="polite">HIT THE RING</div>
+      <div class="overlay is-visible" id="overlay">
+        <div class="overlay-content" id="overlayContent">
+          <span class="eyebrow">DEFEND THE CORE</span>
+          <h1>その一撃で、<br>まとめて消せ。</h1>
+          <p>光がリングに重なったら、タップ。<br>3つ同時に消すと、エネルギー回復。</p>
+          <button class="start-button" id="startButton" type="button">PLAY <span>→</span></button>
+          <small>画面タップ / SPACE</small>
+        </div>
+      </div>
+    </section>
+
+    <footer class="controls">
+      <div class="charges" id="charges" aria-label="衝撃波エネルギー">
+        <div class="charge is-full"><div class="charge-fill"></div></div>
+        <div class="charge is-full"><div class="charge-fill"></div></div>
+      </div>
+      <button class="pulse-button" id="pulseButton" type="button" aria-label="衝撃波を発射">
+        <span class="pulse-disc"><span class="pulse-icon"><i></i><i></i><i></i></span><span id="pulseLabel">PULSE</span></span>
+      </button>
+      <div class="footer-info"><span id="footerLabel">TAP ANYWHERE</span><span id="hintLabel">3 HITS = +1 CHARGE</span></div>
+    </footer>
+  </main>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
