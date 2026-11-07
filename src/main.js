@@ -68,6 +68,7 @@ function syncBest() {
   }
 }
 function start() {
+  if (document.activeElement?.tagName === "BUTTON") document.activeElement.blur();
   sparks = []; labels = []; shake = 0; lastScore = -1;
   game.start();
   overlay.classList.remove("is-visible");
@@ -119,7 +120,8 @@ pulseBtn.addEventListener("click", trigger);
 $("startButton").addEventListener("click", start);
 document.addEventListener("keydown", e => {
   if (!["Space", "Enter"].includes(e.code) || e.repeat) return;
-  if (e.target?.tagName === "BUTTON" && e.code === "Enter") return;
+  // Focused buttons already receive a native click on Space/Enter.
+  if (e.target?.closest?.("button")) return;
   e.preventDefault();
   trigger();
 });
@@ -147,10 +149,10 @@ function handleEvents() {
         break;
       }
       case "chain":
-        setStatus("SYNC ×" + e.streak + "  ·  +" + e.bonus + "  ·  CHARGE +1", "hot", 1.6);
+        setStatus("SYNC ×3  ·  +" + e.bonus + "  ·  CHARGE +1", "hot", 1.6);
         shake = Math.max(shake, 2.5);
         break;
-      case "extra": if (e.count >= 5) setStatus("OVERDRIVE ×" + e.count, "hot", 1); break;
+      case "extra": if (e.count >= 4) setStatus("SYNC ×" + e.count + "  ·  CHARGE +1", "hot", 1.25); break;
       case "damage": shake = 8; setStatus("CORE HIT  ·  " + e.life + " LEFT", "danger", 1.3); break;
       case "gameover": showGameOver(); break;
       case "blank": if (game.state.phase === "playing") setStatus(e.reason, "", .65); break;
